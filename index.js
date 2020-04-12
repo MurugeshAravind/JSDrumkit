@@ -4,6 +4,7 @@ let buttonLength = document.querySelectorAll('.drum').length;
 document.addEventListener('keydown', function(event) {
     console.log(event.key);
     makeSoundKey(event.key);
+    buttonAnimation(event.key);
 });
 
 for (let i = 0; i < buttonLength; i++) {
@@ -15,6 +16,7 @@ for (let i = 0; i < buttonLength; i++) {
 function respondToClick() {
   var buttonInnerHTML = this.innerHTML;
   makeSoundKey(buttonInnerHTML);
+  buttonAnimation(buttonInnerHTML);
 }
 
 function makeSoundKey(key) {
@@ -51,4 +53,12 @@ function makeSoundKey(key) {
       console.log('Pressed key is not under the switch case-->', key);
       break;
   }
+}
+
+function buttonAnimation(currentKey) {
+  var activeButton = document.querySelector("." + currentKey);
+  activeButton.classList.add("pressed");
+  setTimeout(() => {
+    activeButton.classList.remove("pressed");
+  }, 100);
 }
